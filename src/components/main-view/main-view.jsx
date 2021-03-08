@@ -1,8 +1,18 @@
-export class MainView extends React.Component {
+import React from 'react';
+import axios from 'axios';
 
-  // One of the "hooks" available in a React Component
+export default class MainView extends React.Component {
+
+  constructor() {
+    // Call the superclass constructor
+    // so React can initialize it
+    super();
+
+    // Initialize the state to an empty object so we can destructure it later
+    this.state = {};
+  }// One of the "hooks" available in a React Component
   componentDidMount() {
-    axios.get('<my-api-endpoint/movies>')
+    axios.get('/movies')
       .then(response => {
         // Assign the result to the state
         this.setState({
