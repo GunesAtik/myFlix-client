@@ -12,7 +12,7 @@ export default class MainView extends React.Component {
     this.state = {};
   }// One of the "hooks" available in a React Component
   componentDidMount() {
-    axios.get('/movies')
+    axios.get('https://myflixxx.herokuapp.com/movies')
       .then(response => {
         // Assign the result to the state
         this.setState({
