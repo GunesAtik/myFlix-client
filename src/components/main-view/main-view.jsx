@@ -1,12 +1,8 @@
-import React from 'react';
-import axios from 'axios';
-
-
 export class MainView extends React.Component {
 
   // One of the "hooks" available in a React Component
   componentDidMount() {
-    axios.get('</movies>')
+    axios.get('<my-api-endpoint/movies>')
       .then(response => {
         // Assign the result to the state
         this.setState({
