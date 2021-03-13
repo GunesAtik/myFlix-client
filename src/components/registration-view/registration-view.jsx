@@ -10,26 +10,25 @@ export function RegisterView(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [birthday, setBirthday] = useState('');
+  const [birthdate, setBirthdate] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
+    console.log(username, password, confirmPassword, email, birthdate);
     props.onRegister('test');
   };
 
   return (
     <React.Fragment>
-      <Form className='form-register'>
-        <h1 className='text-danger'>Welcome to myFlix!</h1>
-        <p className='mb-5'>Please register to continue.</p>
+      <Form className='register-form'>
+        <h1 className='register-header'>Registration Welcome!</h1>
         <Form.Group controlId='formBasicText'>
           <Form.Label>Username</Form.Label>
           <Form.Control
-            type='text'
+            type='password'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder='Enter Username'
+            placeholder='Enter usename'
           />
         </Form.Group>
         <Form.Group controlId='formBasicEmail'>
@@ -38,7 +37,7 @@ export function RegisterView(props) {
             type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder='Enter Email'
+            placeholder='Enter email'
           />
         </Form.Group>
         <Form.Group controlId='formBasicPassword'>
@@ -47,7 +46,7 @@ export function RegisterView(props) {
             type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder='Enter Password'
+            placeholder='Enter new password'
           />
         </Form.Group>
         <Form.Group controlId='formBasicConfirmPassword'>
@@ -56,22 +55,19 @@ export function RegisterView(props) {
             type='password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder='Enter Confirm Password'
+            placeholder='Confirm your password'
           />
         </Form.Group>
-        <Form.Group controlId='formBasicBirthday'>
-          <Form.Label>Birthday</Form.Label>
+        <Form.Group controlId='formBasicDate'>
+          <Form.Label>Birthdate</Form.Label>
           <Form.Control
             type='date'
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
-            placeholder='Enter Birthday'
+            value={birthdate}
+            onChange={(e) => setBirthdate(e.target.value)}
+            placeholder='Enter your birthdate'
           />
         </Form.Group>
-
-        <Button onClick={handleSubmit} variant='primary' type='submit'>
-          Submit
-        </Button>
+        <Button type='button' variant='dark' onClick={handleSubmit}>Submit</Button>
       </Form>
     </React.Fragment>
   );
@@ -82,7 +78,7 @@ RegisterView.propTypes = {
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     confirmPassword: PropTypes.string.isRequired,
-    birthday: PropTypes.string.isRequired,
+    birthdate: PropTypes.string.isRequired
   }),
-  onRegister: PropTypes.func.isRequired,
+  onRegister: PropTypes.func,
 };
