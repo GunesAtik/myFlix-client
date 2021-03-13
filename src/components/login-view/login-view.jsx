@@ -12,7 +12,6 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password);
-    // send a request to server for authentication, then calls props.onLoggedIn(username)
     props.onLoggedIn(username);
   };
 
