@@ -5,7 +5,7 @@ import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../registration-view/registration-view'
 
-import './main-view.scss'
+//import './main-view.scss'
 
 import {
   Navbar,
