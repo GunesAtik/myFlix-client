@@ -29,16 +29,13 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get('https://myflixxx.herokuapp.com/movies')
-      .then(response => {
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
       });
+      this.getMovies(accessToken);
+    }
   }
 
   onMovieClick(movie) {
