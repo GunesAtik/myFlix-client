@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Card, Button } from 'react-bootstrap';
 
-//import './movie-view.scss';
-
 export class MovieView extends React.Component {
 
   constructor() {
@@ -54,3 +52,11 @@ MovieView.propTypes = {
   }).isRequired,
   onClick: PropTypes.func.isRequired
 };
+
+<Link to={`/directors/${movie.Director.Name}`}>
+  <Button variant="link">Director</Button>
+</Link>
+
+<Link to={`/genres/${movie.Genre.Name}`}>
+  <Button variant="link">Genre</Button>
+</Link>
