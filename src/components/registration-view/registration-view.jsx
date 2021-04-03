@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Form, Button } from 'react-bootstrap';
 
-//import './registration-view.scss';
-
 export function RegisterView(props) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
