@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import { Form, Button } from 'react-bootstrap';
 
@@ -8,13 +9,26 @@ export function RegisterView(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [birthdate, setBirthdate] = useState('');
+  const [birthday, setBirthdate] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, confirmPassword, email, birthdate);
-    props.onRegister('test');
+    axios.post('https://myflixxx.herokuapp.com/users', {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+      })
+      .catch(e => {
+        console.log('error registering the user')
+      });
   };
+
 
   return (
     <React.Fragment>
@@ -60,7 +74,7 @@ export function RegisterView(props) {
           <Form.Label>Birthdate</Form.Label>
           <Form.Control
             type='date'
-            value={birthdate}
+            value={birthday}
             onChange={(e) => setBirthdate(e.target.value)}
             placeholder='Enter your birthdate'
           />
@@ -80,18 +94,3 @@ RegisterView.propTypes = {
   }),
   onRegister: PropTypes.func,
 };
-
-axios.post('https://myflixxx.herokuapp.com/users', {
-  Username: username,
-  Password: password,
-  Email: email,
-  Birthday: birthday
-})
-  .then(response => {
-    const data = response.data;
-    console.log(data);
-    window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
-  })
-  .catch(e => {
-    console.log('error registering the user')
-  });
