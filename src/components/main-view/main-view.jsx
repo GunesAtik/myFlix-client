@@ -92,28 +92,7 @@ export class MainView extends React.Component {
     if (!movies) return <div className='main-view'></div>;
 
     return (
-<<<<<<< HEAD
       <Router>
-        <div className="main-view">
-<<<<<<< HEAD
-          <Route exact path="/" render={() => {
-            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            return movies.map(m => <MovieCard key={m._id} movie={m} />)
-          }
-          } />
-          <Route path="/register" render={() => <RegistrationView />} />          <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
-=======
-          <Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m} />)} />
-          <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
->>>>>>> parent of 4b87a25 (Update main-view.jsx)
-          <Route path="/directors/:name" render={({ match }) => {
-            if (!movies) return <div className="main-view" />;
-            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
-          }} />
-<<<<<<< HEAD
-=======
-=======
-      <React.Fragment>
         <div className='main-view'>
           <header>
             <Navbar bg='dark' variant='dark'>
@@ -133,33 +112,19 @@ export class MainView extends React.Component {
               </Nav>
             </Navbar>
           </header>
-          <div className='main-body text-center'>
-            {selectedMovie ? (
-              <MovieView
-                movie={selectedMovie}
-                onClick={() => this.onButtonClick()}
-              />
-            ) : (
-                <Container>
-                  <Row>
-                    {movies.map((movie) => (
-                      <Col xs={12} sm={6} md={4} key={movie._id}>
-                        <MovieCard
-                          key={movie._id}
-                          movie={movie}
-                          onClick={(movie) => this.onMovieClick(movie)}
-                        />
-                      </Col>
-                    ))}
-                  </Row>
-                </Container>
-              )}
-          </div>
-          <div className='test'></div>
->>>>>>> parent of f8fe691 (Update main-view.jsx)
->>>>>>> parent of 4b87a25 (Update main-view.jsx)
+          <Route exact path="/" render={() => {
+            if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+            return movies.map(m => <MovieCard key={m._id} movie={m} />)
+          }
+          } />
+          <Route path="/register" render={() => <RegistrationView />} />
+          <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+          <Route path="/directors/:name" render={({ match }) => {
+            if (!movies) return <div className="main-view" />;
+            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
+          }} />
         </div>
-      </React.Fragment>
+      </Router>
     );
   }
 }
