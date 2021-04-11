@@ -4,7 +4,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { RegisterView } from '../registration-view/registration-view'
-
+import { BrowserRouter as Router, Route } from "react-router-dom";
 //import './main-view.scss'
 
 import {
@@ -23,8 +23,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
-      user: null,
-      register: null
+      user: "",
     };
   }
 
@@ -41,12 +40,6 @@ export class MainView extends React.Component {
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
-    });
-  }
-
-  onRegister(register) {
-    this.setState({
-      register
     });
   }
 
@@ -83,42 +76,34 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user, register } = this.state;
-
-    if (!register) return <RegisterView onRegister={(register) => this.onRegister(register)} />
-
-    if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-
-    if (!movies) return <div className='main-view'></div>;
+    const { movies, selectedMovie, user } = this.state;
 
     return (
       <Router>
         <div className='main-view'>
-          <header>
-            <Navbar bg='dark' variant='dark'>
-              <Nav className='justify-content-center'>
-                <Nav.Item>
-                  <Nav.Link target='_blank' href='#Home'>Home</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link target='_blank' href='#Directors'>Directors</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link target='_blank' href='#Genres'>Genres</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link className='logout-button' target='_blank' href='#Home'>Logout</Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Navbar>
-          </header>
+          <Navbar bg='dark' variant='dark'>
+            <Nav className='justify-content-center'>
+              <Nav.Item>
+                <Nav.Link target='_blank' href='#Home'>Home</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link target='_blank' href='#Directors'>Directors</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link target='_blank' href='#Genres'>Genres</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link className='logout-button' target='_blank' href='#Home'>Logout</Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Navbar>
           <Route exact path="/" render={() => {
             if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-            return movies.map(m => <MovieCard key={m._id} movie={m} />)
+            return movies && movies.map(m => <MovieCard key={m._id} movie={m} />)
           }
           } />
-          <Route path="/register" render={() => <RegistrationView />} />
-          <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+          <Route path="/register" render={() => <RegisterView />} />
+          <Route path="/movies/:movieId" render={({ match }) => movies && <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
           <Route path="/directors/:name" render={({ match }) => {
             if (!movies) return <div className="main-view" />;
             return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
