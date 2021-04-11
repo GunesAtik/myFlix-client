@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 //import './login-view.scss';
 
@@ -49,10 +50,13 @@ export function LoginView(props) {
             placeholder='Your password goes here!'
           />
         </Form.Group>
-        <Button onClick={handleSubmit} variant='dark' type='submit'>
-          Submit
-        </Button>
       </Form>
+      <Button onClick={handleSubmit} variant='dark' type='submit'>
+        Submit
+        </Button>
+      <Link to={`/register`}>
+        <Button variant="link" className="button-register">Create new Account</Button>
+      </Link>
     </React.Fragment>
   );
 }
