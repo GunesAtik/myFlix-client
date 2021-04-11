@@ -12,21 +12,21 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onClick } = this.props;
+    const { movie } = this.props;
 
     if (!movie) return null;
 
     return (
       <div className='movie-view'>
         <Card>
-          <Card.Img className='movie-poster' variant="top" src={movie.ImageURL} />
+          <Card.Img className='movie-poster' variant="top" src={movie.ImagePath} />
           <Card.Title className='label-title'>{movie.Title}</Card.Title>
           <Card.Body>
             <Card.Text className='label-body'>{movie.Description}</Card.Text>
             <Card.Text className='label-body'>Director: {movie.Director.Name}</Card.Text>
             <Card.Text className='label-body'>Genre: {movie.Genre.Name}</Card.Text>
           </Card.Body>
-          <Button className='return-button' variant='dark' onClick={() => onClick(movie)}>Return to Movie List</Button>
+          <Button className='return-button' variant='dark' onClick={() => window.open("/", "_self")}>Return to Movie List</Button>
         </Card>
       </div>
     );
